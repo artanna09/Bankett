@@ -20,7 +20,7 @@ class CreateServiceTable extends Migration
             $table->string('description');
             $table->string('photo');
             $table->string('extra_service');
-            $table->string('person-number');
+            $table->string('person_number');
             $table->integer('service_type_id');
             $table->integer('company_id');
             $table->foreign('service_type_id')->references('id')->on('service_type');

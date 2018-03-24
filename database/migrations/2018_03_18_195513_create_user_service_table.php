@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFindTable extends Migration
+class CreateUserServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateFindTable extends Migration
      */
     public function up()
     {
-        Schema::create('find', function (Blueprint $table) {
+        Schema::create('user_service', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('company_id');
+            $table->integer('service_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('company');
-            $table->timestamps();
-        });
+            $table->foreign('service_id')->references('id')->on('service');
+           });
     }
 
     /**
@@ -30,6 +29,6 @@ class CreateFindTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('find');
+        Schema::dropIfExists('user_service');
     }
 }

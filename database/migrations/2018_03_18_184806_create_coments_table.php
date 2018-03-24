@@ -17,9 +17,9 @@ class CreateComentsTable extends Migration
             $table->increments('id');
             $table->string('coments_text');
             $table->integer('user_id');
-            $table->integer('company_id');
+            $table->integer('service_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('company');
+            $table->foreign('service_id')->references('id')->on('service');
             $table->timestamps();
         });
     }

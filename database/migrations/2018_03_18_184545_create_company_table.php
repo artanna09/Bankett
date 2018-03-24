@@ -22,8 +22,9 @@ class CreateCompanyTable extends Migration
             $table->string('adress');
             $table->string('service');
             $table->integer('role_id');
+            $table->integer('service_type_id');
             $table->foreign('role_id')->references('id')->on('role');
-            $table->timestamps();
+            $table->foreign('service_type_id')->references('id')->on('service_type');
         });
     }
 
