@@ -13,13 +13,13 @@ class CreateUserServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_service', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('service_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('service_id')->references('id')->on('service');
-           });
+        });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateUserServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_service');
+        Schema::dropIfExists('favorites');
     }
 }

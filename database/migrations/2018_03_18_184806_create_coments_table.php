@@ -13,9 +13,9 @@ class CreateComentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('coments', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('coments_text');
+            $table->string('text');
             $table->integer('user_id');
             $table->integer('service_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -31,6 +31,6 @@ class CreateComentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coments');
+        Schema::dropIfExists('feedback');
     }
 }
