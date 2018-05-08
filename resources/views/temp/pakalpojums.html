@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bankett</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -35,7 +35,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-6"><img src="assets/img/large.jpg">
-                    <h2 class="pakalpojums-nosaukums">Nosaukums</h2>
+                    <h2 class="pakalpojums-nt">Nosaukums</h2>
+                    <h3 class="pakalpojums-nt">Kategorija</h3>
                     <div class="row">
                         <div class="col-6 pakalpojumi-info1">
                             <h4>Cena:</h4>
@@ -69,6 +70,9 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col"><button class="btn btn-primary btn-block" type="submit">Uzrakstiet e-ziņu pakalpojuma snedzējam</button></div>
+                    </div>
+                    <div class="row">
                         <div class="col-6 pakalpojumi-row-button"><button class="btn btn-primary btn-block" type="submit">Rediģet</button></div>
                         <div class="col-6 pakalpojumi-row-button"><button class="btn btn-primary btn-block" type="submit">Dzēst</button></div>
                     </div>
@@ -83,11 +87,20 @@
         </div>
     </div>
     <div class="atsauksmes">
+        <div class="row no-gutters">
+            <div class="col-4 pakalpojumi-info1">
+                <h3>Lietotāju atsauksmes</h3>
+            </div>
+            <div class="col-4 pakalpojumi-info1"><i class="fa fa-comment"></i></div>
+            <div class="col-4">
+                <h3 class="atsauksme-atstat">Atstāt atsauksmi</h3>
+            </div>
+        </div>
         <div class="container">
-            <h3>Lietotāju atsauksmes</h3>
             <div class="row">
                 <div class="col-2 atsauksme-bilde"><img src="assets/img/0_200.png" class="atsauksme-bilde"></div>
                 <div class="col-7">
+                    <h5>Vārds Uzvārds</h5>
                     <p>Atsauksmes teksts</p>
                 </div>
                 <div class="col button7"><button class="btn btn-primary btn-block" type="submit">Rediģet</button><button class="btn btn-primary btn-block" type="submit">Dzēst</button></div>
@@ -104,8 +117,8 @@
             <p class="copyright">Latvijas Universitāte 2018</p>
         </footer>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 </body>
 

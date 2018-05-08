@@ -1,17 +1,38 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.app') @section('content')
 <div class="login-clean">
-    <form method="post" id="auto-form">
+    <form method="POST" action="{{ route('login') }}" id="auto-form">
+        @csrf
         <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"><i class="fa fa-user" style="color:rgb(118,7,30);"></i></div>
-        <div class="form-group"><input class="form-control" type="email" name="email" placeholder="E-pasts"></div>
-        <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Parole"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Ienākt</button></div><a href="#" id="forgot-password">Aizmirsu paroli</a></form>
+        <div class="illustration">
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="form-group">
+            <input id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="E-pasts" value="{{ old('email') }}" autofocus>
+            @if ($errors->has('email'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+        </div>
+        <div class="form-group">
+            <input id="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" name="password" placeholder="Parole">
+            @if ($errors->has('password'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Ienākt</button>
+        </div>
+        <a id="forgot-password" href="{{ route('password.request') }}">
+            {{ __('Aizmirsu paroli') }}
+        </a>
+    </form>
 </div>
 
 
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -25,12 +46,11 @@
                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
+                                    required autofocus> @if ($errors->has('email'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -39,12 +59,11 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
+                                    required> @if ($errors->has('password'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -53,7 +72,7 @@
                             <div class="col-md-6 offset-md-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
+                                        <input type="checkbox" name="remember" {{ old( 'remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
                                     </label>
                                 </div>
                             </div>
@@ -75,5 +94,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

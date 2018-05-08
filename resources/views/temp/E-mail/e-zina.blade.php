@@ -14,14 +14,18 @@
 <body>
     <div class="register-photo">
         <div class="form-container">
-            <div class="image-holder"></div>
+            <div class="image-holder3"></div>
             <form method="post">
-                <h4 class="text-center"><strong>Пожалуйста, опишите вашу услугу, чтобы администратор нашего сайта смог ее добавить в систему</strong></h4>
-                <p id="rakstit-admin-p">Просим упомянуть такие параметры своей услуги как nosaukums, cena, atrašanas vieta (Rīgas rajons), cilvēku daudzums, kontaktinformācija, pakalpojuma apraksts un papildpakalpojumi, kurus jūs gribat piedavāt, там, где это необходимо.</p>
-                <div
-                    class="form-group"><button class="btn btn-primary btn-block" type="submit">Продолжить</button></div>
-        </form>
-    </div>
+                <h2 class="text-center"><strong>Uzrakstiet šeit jūsu ziņu, lai pakalpojumu sniedzējs varētu to apskatīt</strong></h2>
+                <div class="form-group"><textarea class="form-control" rows="10"></textarea></div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-6"><button class="btn btn-primary btn-block" type="submit">Atsūtīt</button></div>
+                        <div class="col-6"><button class="btn btn-primary btn-block" type="submit">Atcelt</button></div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
