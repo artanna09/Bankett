@@ -36,7 +36,8 @@
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('img/banquet.png') }}" alt="{{ config('app.name', 'Bankett') }}" id="nav-icon2">
+                    <img src="{{ asset('img/banquet.png') }}" id="nav-icon2">
+                    Bankett
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -44,20 +45,18 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    @guest @else
+                    @if ( !Auth::guest() && Auth::user()->isAdmin() )
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav mr-auto">
                         <li class="dropdown">
                             <a aria-expanded="false" href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button">Administratoriem</a>
                             <div role="menu" class="dropdown-menu">
-                                <a role="presentation" href="#" class="dropdown-item">Pievienot pakalpojumu</a>
-                                <a role="presentation" href="#" class="dropdown-item">Pievienot ziņu</a>
+                            <a role="presentation" href="{{ route('addService') }}" class="dropdown-item">Pievienot pakalpojumu</a>
+                            <a role="presentation" href="{{ route('addPost') }}" class="dropdown-item">Pievienot ziņu</a>
                             </div>
                         </li>
                     </ul>
-                    @endguest
-
-
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav ml-auto">
@@ -104,6 +103,16 @@
             </div>
         </nav>
         @yield('content')
+        <div class="footer-basic">
+            <footer>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Blogs</a></li>
+                    <li class="list-inline-item"><a href="#">Pakalpojumi</a></li>
+                    <li class="list-inline-item"><a href="#">Mans profils</a></li>
+                </ul>
+                <p class="copyright">Latvijas Universitāte 2018</p>
+            </footer>
+        </div>
     </div>
 </body>
 

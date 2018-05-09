@@ -18,7 +18,7 @@ class CreateServiceTable extends Migration
             $table->string('adress');
             $table->string('price');
             $table->string('description');
-            $table->string('photo');
+            $table->text('photo');
             $table->string('extra_service');
             $table->string('person_number');
             $table->integer('service_type_id');

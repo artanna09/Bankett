@@ -13,3 +13,8 @@
 
 Auth::routes();
 Route::get('/', 'IndexController@index');
+Route::get('/blog/add', 'BlogController@create')->name('addPost')->middleware('admin');
+Route::get('/blog', 'BlogController@index')->name('blog');
+Route::post('/blog', 'BlogController@store')->name('createPost')->middleware('admin');
+Route::get('/services/add', 'ServicesController@create')->name('addService');
+Route::post('/services', 'ServicesController@store')->name('createService');
