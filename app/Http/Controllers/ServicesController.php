@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Service;
+use App\User_service;
+use Illuminate\Support\Facades\Auth;
 
 class ServicesController extends Controller
 {
@@ -13,7 +16,14 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::orderBy('updated_at','desc')->paginate(10);
+        return view('temp/Service/pakalpojumi')->with('services', $services);
+    }
+
+    public function memo()
+    {
+        $userFavorites = User_service::where('user_id', '=', Auth::id())->paginate(10);
+        return view('temp/Service/memo')->with('favorites');
     }
 
     /**

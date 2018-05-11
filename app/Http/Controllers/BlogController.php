@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Blog;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
@@ -16,7 +16,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('temp/Blog/blogs');
+        $posts = Blog::orderBy('created_at', 'desc')->paginate(10); // Izlabot, lai būtu kā dokumentācijā
+        return view('temp/Blog/blogs')->with('posts', $posts);
     }
 
     /**
@@ -40,24 +41,28 @@ class BlogController extends Controller
         $rules = array(
             'title' => 'required|string|max:100',
             'text' => 'required|string|max:10000',
-            'picture' => 'image'
+            'picture' => 'image',
         );
-        
+
         $this->validate($request, $rules);
 
-
-        $path = $request->picture->path();
-        $type = $request->picture->extension();
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        //Handle file upload
+        if ($request->hasFile('picture')) {
+            //Get file name with  the extension
+            $fileNameToStore = $request->picture->getClientOriginalName();
+            //Upload image
+            $path = $request->file('picture')->storeAs('public/posts', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'posts/noimage.jpg';
+        }
 
         $post = new Blog;
         $post->title = $request->title;
         $post->text = $request->text;
-        $post->picture = $base64;
+        $post->picture = $fileNameToStore;
         $post->user()->associate(User::find(Auth::user()->id));
         $post->save();
-        
+
         return redirect()->action('BlogController@index', array($post->id))->withMessage('Pievienota jauna ziņa!');
     }
 
@@ -69,7 +74,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        return view('temp/Blog/zina');
+        $post = Blog::find($id);
+        return view('temp/Blog/zina')->with('post', $post);
     }
 
     /**

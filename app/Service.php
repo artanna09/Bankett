@@ -17,9 +17,6 @@ class Service extends Model
         return $this->hasMany('App\User_service');
        }
 
-       public function company(){
-        return $this->belongsTo('App\Company');
-       }
        public function coments(){
         return $this->hasMany('App\Coments');
 }

@@ -17,7 +17,7 @@ class CreateBlogTable extends Migration
             $table->increments('id');
             $table->string('title',100);
             $table->string('text',10000);
-            $table->text('picture');
+            $table->string('picture', 300);
             $table->integer('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
