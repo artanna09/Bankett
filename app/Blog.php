@@ -11,7 +11,6 @@ class Blog extends Model
     //Primary Key
     public $primaryKey = 'id';
 
-
     public $timestamps = true;
 
     public function user(){

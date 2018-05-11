@@ -13,7 +13,7 @@
                 <h1>{{ $favorite->service->title }}</h1>
                 <p>{{ $favorite->service->updated_at }}</p>
                 <p>{{ $favorite->service->text }}</p>
-                <a href="{{ route('showPost', ['id' => $favorite->service->id]) }}">Lasīt visu ziņu...</a>
+                <a href="{{ route('showService', ['id' => $favorite->service->id]) }}">Lasīt visu ziņu...</a>
             </div>
         </div>
         @endforeach

@@ -88,7 +88,7 @@
                         <p>{{ $service->price }}</p>
                         <p>{{ $service->adress }}</p>
                         <p>{{ $service->description }}</p>
-                        <a href="{{ route('showPost', ['id' => $service->id]) }}">Lasīt visu pakalpojumu...</a>
+                        <a href="{{ route('showService', ['id' => $service->id]) }}">Lasīt visu pakalpojumu...</a>
                     </div>
                     <div class="col">
                         <img src="{{ asset('/storage/services/'. $service->photo)  }}" class="pakalpojumi-img">

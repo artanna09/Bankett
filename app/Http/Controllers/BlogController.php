@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Blog::orderBy('created_at', 'desc')->paginate(10); // Izlabot, lai būtu kā dokumentācijā
+        $posts = Blog::orderBy('created_at', 'desc')->paginate(10);
         return view('temp/Blog/blogs')->with('posts', $posts);
     }
 

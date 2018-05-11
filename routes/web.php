@@ -23,5 +23,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/blog/{id}', 'BlogController@show')->name('showPost');
     Route::get('/services', 'ServicesController@index')->name('services');
     Route::get('/services/memo', 'ServicesController@memo')->name('memo');
+    Route::get('/services/{id}', 'ServicesController@show')->name('showService');
 });
 Route::get('/', 'IndexController@index');
