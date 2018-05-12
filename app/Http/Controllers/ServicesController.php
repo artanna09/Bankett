@@ -28,7 +28,7 @@ class ServicesController extends Controller
         foreach ($services as $service) {
             $service->description = str_limit($service->description, 100);
         }
-        return view('temp/Service/pakalpojumi')->with('services', $services)->with('serviceTypes', $serviceTypes);
+        return view('Service/pakalpojumi')->with('services', $services)->with('serviceTypes', $serviceTypes);
     }
 
     public function sort($id)
@@ -41,13 +41,13 @@ class ServicesController extends Controller
         }
         $services = $services->orderBy('updated_at', 'desc')->paginate(10);
         $serviceTypes = Service_type::orderBy('name')->get();
-        return view('temp/Service/pakalpojumi')->with('services', $services)->with('serviceTypes', $serviceTypes);
+        return view('Service/pakalpojumi')->with('services', $services)->with('serviceTypes', $serviceTypes);
     }
 
-    public function memo()
+    public function favorites()
     {
         $userFavorites = User_service::where('user_id', '=', Auth::id())->paginate(10);
-        return view('temp/Service/memo')->with('favorites', $userFavorites);
+        return view('Service/favoriti')->with('favorites', $userFavorites);
     }
 
     /**
@@ -57,7 +57,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return view('temp/Service/pakalpojums-add');
+        return view('Service/pakalpojums-add');
     }
 
     /**
@@ -80,7 +80,7 @@ class ServicesController extends Controller
     public function show($id)
     {
         $service = Service::find($id);
-        return view('temp/Service/pakalpojums')->with('service', $service);
+        return view('Service/pakalpojums')->with('service', $service);
     }
 
     /**
@@ -91,7 +91,7 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        return view('temp/Service/pakalpojums-red');
+        return view('Service/pakalpojums-red');
     }
 
     /**
@@ -119,16 +119,19 @@ class ServicesController extends Controller
 
     public function request()
     {
-        return view('temp/E-mail/pakalpojums-admin');
+        return view('E-mail/pakalpojums-admin');
     }
 
     public function email(Request $request)
     {
         $content = $request->input('content');
+        $pictureName = $request->file('picture')->GetClientOriginalName();
 
-        Mail::send('emails.send', ['mailer' => Auth::user()->email, 'content' => $content], function ($message) {
+        
+        Mail::send('E-mail.send', ['mailer' => Auth::user()->email, 'content' => $content], function ($message) use ($request, $pictureName) {
             $message->from(Auth::user()->email, Auth::user()->name . ' ' . Auth::user()->surname);
             $message->to('artanna09@inbox.lv', 'Admin');
+            $message->attach($request->picture, ['as' => $pictureName]);
         });
 
         return redirect()->action('ServicesController@index');
