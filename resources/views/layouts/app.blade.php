@@ -75,12 +75,12 @@
                             <a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle nav-link dropdown-toggle">Pakalpojumi</a>
                             <div role="menu" class="dropdown-menu">
                                 <a role="presentation" href="{{ route('services') }}" class="dropdown-item">Svētku pakalpojumi</a>
-                                <a role="presentation" href="{{ route('addService') }}" class="dropdown-item">Pieprasīt pakalpojumu pievienošanu</a>
+                                <a role="presentation" href="{{ route('requestService') }}" class="dropdown-item">Pieprasīt pakalpojumu pievienošanu</a>
                             </div>
                         </li>
                         <li role="presentation" class="nav-item">
                             <a href="{{ route('memo') }}" class="nav-link">
-                                <i class="fa fa-heart" id="navbar-icon"></i>Memo
+                                <i class="fa fa-heart" id="navbar-icon"></i>Favorīti
                             </a>
                         </li>
                         <li class="dropdown">
@@ -105,17 +105,6 @@
         @yield('content')
         <div class="footer-basic">
             <footer>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a href="#">Blogs</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#">Pakalpojumi</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#">Mans profils</a>
-                    </li>
-                </ul>
                 <p class="copyright">Latvijas Universitāte 2018</p>
             </footer>
         </div>

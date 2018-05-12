@@ -17,6 +17,9 @@ class BlogController extends Controller
     public function index()
     {
         $posts = Blog::orderBy('created_at', 'desc')->paginate(10);
+        foreach ($posts as $post) {
+            $post->text = str_limit($post->text,100);
+        }
         return view('temp/Blog/blogs')->with('posts', $posts);
     }
 
@@ -63,7 +66,7 @@ class BlogController extends Controller
         $post->user()->associate(User::find(Auth::user()->id));
         $post->save();
 
-        return redirect()->action('BlogController@index', array($post->id))->withMessage('Pievienota jauna ziņa!');
+        return redirect()->action('BlogController@index');
     }
 
     /**

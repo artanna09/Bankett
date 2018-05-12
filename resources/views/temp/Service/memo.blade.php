@@ -18,7 +18,7 @@
         </div>
         @endforeach
     <div class="pages-list" style="transform: translateX(45%);">
-        {{$favorites->service->links()}}
+        {{$favorites->links()}}
     </div>
     @else
         <h1>Ziņas netika atrastas</h1>

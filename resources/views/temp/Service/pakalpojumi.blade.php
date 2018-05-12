@@ -6,8 +6,9 @@
         <div class="row">
             <div class="col-2">
                 <h5>Nosaukums</h5>
-                <form>
-                    <input class="form-control" type="search">
+                <form method="GET" action="{{ Request::url() }}" role="search" >
+                    <input class="form-control" type="search" name="title">
+                    <input type="submit">
                 </form>
             </div>
             <div class="col-3">
@@ -17,17 +18,17 @@
                         <p>No</p>
                     </div>
                     <div class="col-4">
-                        <form>
+                        
                             <input class="form-control" type="number">
-                        </form>
+                        
                     </div>
                     <div class="col-2">
                         <p>Līdz</p>
                     </div>
                     <div class="col-4">
-                        <form>
+                        
                             <input class="form-control" type="number">
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -38,17 +39,17 @@
                         <p>No</p>
                     </div>
                     <div class="col-4">
-                        <form>
+                        
                             <input class="form-control" type="number">
-                        </form>
+                        
                     </div>
                     <div class="col-2">
                         <p>Līdz</p>
                     </div>
                     <div class="col-4">
-                        <form>
+                        
                             <input class="form-control" type="number">
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -63,7 +64,7 @@
                 </select>
             </div>
             <div class="col-2">
-                <button class="btn btn-primary btn-block" type="submit">Meklēt</button>
+                {{-- <button class="btn btn-primary btn-block" type="submit">Meklēt</button> --}}
             </div>
         </div>
     </div>
@@ -72,12 +73,9 @@
     <div class="row">
         <div class="col-3">
             <ul class="push">
-                <li>Banketu zāles</li>
-                <li>Pasākumu organizatori</li>
-                <li>Fotografi un operatori</li>
-                <li>Mūzikas grupas un izpildītāji</li>
-                <li>Dekorētāji</li>
-                <li>Pasākumu vadītāji</li>
+                @foreach ($serviceTypes as $serviceType)
+                <a href="{{ route('sortServices', ['id' => $serviceType->id]) }}"><li>{{ $serviceType->name }}</li></a>
+                @endforeach
             </ul>
         </div>
         <div class="col-9">
