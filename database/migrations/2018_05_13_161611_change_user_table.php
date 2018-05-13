@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceTypeTable extends Migration
+class ChangeUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateServiceTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_type', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 50);
+        Schema::table('users', function($table){
+            $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
         });
     }
 
@@ -26,6 +25,8 @@ class CreateServiceTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_type');
+        Schema::table('users', function($table){
+            $table->dropForeign('users_role_id_foreign');
+        });
     }
 }

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach($errors->all() as $message)
-        <p class="has-error">{{ $message }}</p>
-    @endforeach
     <div id="block_1">
         <div id="round-1">
             <h1 id="cover-1-heading"> BANKETT - sludinājumu sistēma svētku organizēšanai</h1>
@@ -18,7 +15,10 @@
         <div class="border">
             <div class="border-top"></div>
             <div class="center">
-                <p>Bankett....</p>
+                <p>Aizmirstiet par dažām paterētam stundām "guglēšanai". « Bankett » — tā ir sistēma, kas atvieglo dzīvi visiem,
+                        kuri ir aizņemti ar svētku sagatavošanās procesu. Mūsu pasākumu noformējums ļauj organizēt svinības Rīgā
+                        rekordliels īsos termiņos. Korporatīvs, kāzas, jubilejs: neatkarīgi no iemesla, visi organizatoriskie
+                        jautājumi tiks atrisinātas ar apbrīnojamu ātrumu.</p>
             </div>
             <div class="border-bottom"></div>
         </div>

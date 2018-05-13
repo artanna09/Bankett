@@ -79,14 +79,15 @@
                             </div>
                         </li>
                         <li role="presentation" class="nav-item">
-                            <a href="{{ route('memo') }}" class="nav-link">
+                            <a href="{{ route('favorites') }}" class="nav-link">
                                 <i class="fa fa-heart" id="navbar-icon"></i>Favorīti
                             </a>
                         </li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle nav-link dropdown-toggle">Profils</a>
                             <div role="menu" class="dropdown-menu">
-                                <a role="presentation" href="#" class="dropdown-item">Mans profils</a>
+                                <a role="presentation" href="{{ route('userProfile') }}" class="dropdown-item">Mans profils</a>
+                                <a class="dropdown-item" role="presentation" href="{{ route('editUserProfile') }}">Rediģēt profilu</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -102,6 +103,7 @@
                 </div>
             </div>
         </nav>
+        @include('messages')
         @yield('content')
         <div class="footer-basic">
             <footer>

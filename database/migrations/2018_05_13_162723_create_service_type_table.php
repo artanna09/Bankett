@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFavoritesTable extends Migration
+class CreateServiceTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateFavoritesTable extends Migration
      */
     public function up()
     {
-        Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('service_type', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('service_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('service_id')->references('id')->on('service');
+            $table->string('name', 50);
         });
     }
 
@@ -29,6 +28,6 @@ class CreateFavoritesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('service_type');
     }
 }

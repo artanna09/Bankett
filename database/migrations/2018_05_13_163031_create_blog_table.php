@@ -14,12 +14,14 @@ class CreateBlogTable extends Migration
     public function up()
     {
         Schema::create('blog', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->string('title',100);
             $table->string('text',10000);
             $table->string('picture', 300);
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

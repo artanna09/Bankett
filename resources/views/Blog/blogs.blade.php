@@ -7,7 +7,6 @@
         </div>
         @if(count($posts)>0)
             @foreach($posts as $post)
-
             <div class="row blog-zina">
                 <div class="col-5 blog-img-col">
                     <img src="{{ asset('/storage/posts/'. $post->picture)  }}" class="blog-img">

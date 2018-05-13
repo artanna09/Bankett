@@ -18,6 +18,16 @@ class UsersTableSeeder extends Seeder
             'phone' => "25547913",
             'password' => bcrypt('Test112'),
             'role_id' => "1",
+            'picture' => "noimage.png"
+        ]);
+        DB::table('users')->insert([
+            'name' => "Test",
+            'surname' => "User",
+            'email' => "test@test.lv",
+            'phone' => "24567852",
+            'password' => bcrypt('Test112'),
+            'role_id' => "2",
+            'picture' => "noimage.png"
         ]);
 
     }

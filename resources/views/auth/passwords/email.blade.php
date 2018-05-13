@@ -17,6 +17,40 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-4 form-headings">
+                                    <label class="col-form-label" for="email">
+                                        <br>Ievadiet savu e-pastu un mēs atsutīsim Jums hipersaiti paroles maiņai
+                                        <br>
+                                    </label>
+                                </div>                                
+                                
+                                <div class="col-4" id="form-control-1">
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="E-pasts" required>
+    
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Atsūtīt') }}
+                                </button>
+                                <a class="atcelt" href="{{ route('index') }}">Atcelt</a>
+                            </div>
+                        </div>
+                    </form>
+
+                    {{-- <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -38,7 +72,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>

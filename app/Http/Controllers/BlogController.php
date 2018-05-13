@@ -6,6 +6,7 @@ use App\Blog;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -18,9 +19,9 @@ class BlogController extends Controller
     {
         $posts = Blog::orderBy('created_at', 'desc')->paginate(10);
         foreach ($posts as $post) {
-            $post->text = str_limit($post->text,100);
+            $post->text = str_limit($post->text, 100);
         }
-        return view('temp/Blog/blogs')->with('posts', $posts);
+        return view('Blog/blogs')->with('posts', $posts);
     }
 
     /**
@@ -30,7 +31,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('temp/Blog/zina-add');
+        return view('Blog/zina-add');
     }
 
     /**
@@ -44,20 +45,16 @@ class BlogController extends Controller
         $rules = array(
             'title' => 'required|string|max:100',
             'text' => 'required|string|max:10000',
-            'picture' => 'image',
+            'picture' => 'required|image',
         );
 
         $this->validate($request, $rules);
 
-        //Handle file upload
-        if ($request->hasFile('picture')) {
-            //Get file name with  the extension
-            $fileNameToStore = $request->picture->getClientOriginalName();
-            //Upload image
-            $path = $request->file('picture')->storeAs('public/posts', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'posts/noimage.jpg';
-        }
+        $fileNameWithExt = $request->file('picture')->GetClientOriginalName();
+        $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('picture')->getClientOriginalExtension();
+        $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+        $path = $request->file('picture')->storeAs('public/posts', $fileNameToStore);
 
         $post = new Blog;
         $post->title = $request->title;
@@ -66,7 +63,7 @@ class BlogController extends Controller
         $post->user()->associate(User::find(Auth::user()->id));
         $post->save();
 
-        return redirect()->action('BlogController@index');
+        return redirect()->action('BlogController@index')->with('success', 'Ziņa tika pievienota');
     }
 
     /**
@@ -78,7 +75,7 @@ class BlogController extends Controller
     public function show($id)
     {
         $post = Blog::find($id);
-        return view('temp/Blog/zina')->with('post', $post);
+        return view('Blog/zina')->with('post', $post);
     }
 
     /**
@@ -89,7 +86,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Blog::find($id);
+        return view('Blog/zina-red')->with('post', $post);
     }
 
     /**
@@ -101,7 +99,29 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'title' => 'required|string|max:100',
+            'text' => 'required|string|max:10000',
+            'picture' => 'image',
+        );
+
+        $post = Blog::find($id);
+        
+        if ($request->hasFile('picture')) {
+            $fileNameWithExt = $request->file('picture')->GetClientOriginalName();
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $path = $request->file('picture')->storeAs('public/posts', $fileNameToStore);
+            Storage::delete('public/posts/' . $post->picture);
+            $post->picture = $fileNameToStore;
+        }
+
+        $post->title = $request->input('title');
+        $post->text = $request->input('text');
+        $post->save();
+
+        return redirect()->action('BlogController@index')->with('success', 'Ziņa atjaunota');
     }
 
     /**
@@ -112,6 +132,9 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Blog::find($id);
+        Storage::delete('public/posts/' . $post->picture);
+        $post->delete();
+        return redirect('/blog')->with('success', 'Ziņa izdēsta');
     }
 }

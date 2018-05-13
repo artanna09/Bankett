@@ -1,123 +1,212 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bankett</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
-</head>
-
-<body>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-        <div class="container"><a class="navbar-brand" href="#"><img src="assets/img/banquet.png" class="bankett-icon">Bankett</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav mr-auto">
-                    <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#" style="color:rgb(252,242,229);width:250px;">Administratoriem</a>
-                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Pievienot pakalpojumu</a><a class="dropdown-item" role="presentation" href="#">Pievienot ziņu</a></div>
-                    </li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color:rgb(252,242,229);">Blogs</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#" style="color:rgb(252,242,229);">Pakalpojumi&nbsp;</a>
-                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Svētku pakalpojumi</a><a class="dropdown-item" role="presentation" href="#">Pieprasīt pakalpojumu pievienošanu</a></div>
-                    </li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color:rgb(252,242,229);"><i class="fa fa-heart" id="navbar-icon"></i>Memo</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#" style="color:rgb(252,242,229);">Profils</a>
-                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Mans profils</a><a class="dropdown-item" role="presentation" href="#">Iziet</a></div>
-                    </li>
-                </ul><span class="navbar-text actions"> </span></div>
-        </div>
-    </nav>
-    <div><div class="three"><h1>Pakalpojumu rediģēšana</h1></div></div>
-    <div id="profile-red">
+@section('content')
+<div>
+    <div class="three">
+        <h1>Pakalpojumu rediģēšana</h1>
+    </div>
+</div>
+<form method="post" action="{{ route('updateService', ['id' => $service->id]) }}" enctype="multipart/form-data">
+    <div>
         <div class="container">
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Nosaukums:</h4>
-                </div>
-                <div class="col-4">
-                    <form><input class="form-control" type="text"></form>
-                </div>
-            </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Cena:</h4>
-                </div>
-                <div class="col-4">
-                    <form><input class="form-control" type="text"></form>
-                </div>
-            </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Atrašanas vieta:</h4>
-                </div>
-                <div class="col-4">
-                    <form><select class="form-control"><optgroup label="This is a group"><option value="12" selected="">This is item 1</option><option value="13">This is item 2</option><option value="14">This is item 3</option></optgroup></select></form>
+            @csrf
+            {{ method_field('PUT') }}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="title">Nosaukums</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" name="title" id="title" class="form-control" value="@if(old('title') == ""){{ $service->title }}@else{{ old('title') }}@endif">
+                        @if ($errors->has('title'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                 </div>
             </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Cilvēku daudzums:</h4>
-                </div>
-                <div class="col-4">
-                    <form><input class="form-control" type="email"></form>
-                </div>
-            </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Kontaktinformācija:</h4>
-                </div>
-                <div class="col-4">
-                    <form><input class="form-control" type="email"></form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="title">Tips</label>
+                    </div>
+                    <div class="col-6">
+                        {{ Form::select('serviceType', $serviceTypes, ['class' => 'form-control']) }} 
+                    </div>
                 </div>
             </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Apraksts:</h4>
-                </div>
-                <div class="col-8">
-                    <form><input class="form-control" type="text" id="papild-form"></form>
-                </div>
-            </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Papildpakalpojumi:</h4>
-                </div>
-                <div class="col-8">
-                    <form><input class="form-control" type="text" id="apraksts-form"></form>
-                </div>
-            </div>
-            <div class="row row-profile-red">
-                <div class="col-4">
-                    <h4 class="profile-red-info">Profila bilde:</h4>
-                </div>
-                <div class="col-4">
-                    <form><input type="file"></form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="price">Cena</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control" name="price" value="@if(old('price') == ""){{ $service->price }}@else{{ old('price') }}@endif" step="0.01">
+                        @if ($errors->has('price'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('price') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                 </div>
             </div>
-            <div class="row row-profile-red">
-                <div class="col-4 dzest-pakalpojumu"><button class="btn btn-primary btn-block" type="submit">Dzēst profilu</button></div>
-                <div class="col-4 dzest-pakalpojumu"><button class="btn btn-primary btn-block" type="submit">Saglabāt</button></div>
-                <div class="col-4 dzest-pakalpojumu"><button class="btn btn-primary btn-block" type="submit">Atcelt</button></div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="title">Atrašanas vieta</label>
+                    </div>
+                    <div class="col-6">
+                        <select name="district" class="form-control">
+                            <optgroup label="Riga">
+                                <option value="Centrs" @if( $service->district == "Centrs" ) selected="" @endif>Centrs</option>
+                                <option value="Purvciems" @if( $service->district == "Purvciems" ) selected="" @endif>Purvciems</option>
+                                <option value="Pļavnieki" @if( $service->district == "Pļavnieki" ) selected="" @endif>Pļavnieki</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="adress">Adrese</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="adress" value="@if(old('adress') == ""){{ $service->adress }}@else{{ old('adress') }}@endif">
+                        @if ($errors->has('adress'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('adress') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="person_number_from">Cilvēku daudzums no</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control" name="person_number_from" value="@if(old('person_number_from') == ""){{ $service->person_number_from }}@else{{ old('person_number_from') }}@endif">
+                        @if ($errors->has('person_number_from'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('person_number_from') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="person_number_to">Cilvēku daudzums līdz</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control" name="person_number_to" value="@if(old('person_number_to') == ""){{ $service->person_number_to }}@else{{ old('person_number_to') }}@endif">
+                        @if ($errors->has('person_number_to'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('person_number_to') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="email">E-pasts</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="email" class="form-control" name="email" value="@if(old('email') == ""){{ $service->email }}@else{{ old('email') }}@endif">
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="phone">Tālrunis</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="phone" class="form-control" name="phone" value="@if(old('phone') == ""){{ $service->phone }}@else{{ old('phone') }}@endif">
+                        @if ($errors->has('phone'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('phone') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="description">Apraksts</label>
+                    </div>
+                    <div class="col-6">
+                        <textarea class="form-control" rows="10" name="description">@if(old('description') == ""){{ $service->description }}@else{{ old('description') }}@endif</textarea>
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="extra_service">Papildpakalpojumi</label>
+                    </div>
+                    <div class="col-6">
+                        <textarea class="form-control" rows="10" name="extra_service">@if(old('extra_service') == ""){{ $service->extra_service }}@else{{ old('extra_service') }}@endif</textarea>
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2 form-headings">
+                        <label class="col-form-label" for="photo">Bilde</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="file" name="photo">
+                        @if ($errors->has('photo'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('photo') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="footer-basic">
-        <footer>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Blogs</a></li>
-                <li class="list-inline-item"><a href="#">Pakalpojumi</a></li>
-                <li class="list-inline-item"><a href="#">Mans profils</a></li>
-            </ul>
-            <p class="copyright">Latvijas Universitāte 2018</p>
-        </footer>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-block" onclick="window.location.href='{{ route('deleteService', ['id' => $service->id]) }}';return false;">Dzēst pakalpojumu</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-block" type="submit">Saglabāt</button>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
-</body>
-
-</html>
+</form>
+<div class="row">
+    <div class="col-12">
+        <a class="atcelt" href="{{ route('services') }}">Atcelt</a>
+    </div>
+</div>
+@endsection
