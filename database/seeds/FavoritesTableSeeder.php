@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UserServiceTableSeeder extends Seeder
+class FavoritesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,26 +11,25 @@ class UserServiceTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_service')->insert([
+        DB::table('favorites')->insert([
             'user_id' => 1,
             'service_id' => 1,
         ]);
-        DB::table('user_service')->insert([
+        DB::table('favorites')->insert([
             'user_id' => 1,
             'service_id' => 2,
         ]);
-        DB::table('user_service')->insert([
+        DB::table('favorites')->insert([
             'user_id' => 1,
             'service_id' => 3,
         ]);
-        DB::table('user_service')->insert([
+        DB::table('favorites')->insert([
             'user_id' => 2,
             'service_id' => 2,
         ]);
-        DB::table('user_service')->insert([
+        DB::table('favorites')->insert([
             'user_id' => 2,
             'service_id' => 3,
         ]);
-    
     }
 }

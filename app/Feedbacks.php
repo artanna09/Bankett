@@ -4,17 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_service extends Model
+class Feedbacks extends Model
 {
     //Table name
-    protected $table = 'user_service';
+    protected $table = 'feedbacks';
     //Primary Key
     public $primaryKey = 'id';
+
+
+    public $timestamps = true;
 
     public function user(){
         return $this->belongsTo('App\User');
     }
-
     public function service(){
         return $this->belongsTo('App\Service');
     }

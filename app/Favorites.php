@@ -4,19 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Coments extends Model
+class Favorites extends Model
 {
-    //Table name
-    protected $table = 'coments';
+    protected $table = 'favorites';
     //Primary Key
     public $primaryKey = 'id';
-
-
-    public $timestamps = true;
 
     public function user(){
         return $this->belongsTo('App\User');
     }
+
     public function service(){
         return $this->belongsTo('App\Service');
     }

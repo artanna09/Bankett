@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BlogTableSeeder::class);
         $this->call(ServiceTypeTableSeeder::class);
         $this->call(ServicesTableSeeder::class);
-        $this->call(UserServiceTableSeeder::class);
+        $this->call(FavoritesTableSeeder::class);
     }
 }
