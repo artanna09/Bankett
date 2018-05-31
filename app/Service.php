@@ -10,12 +10,12 @@ class Service extends Model
     protected $table = 'service';
     //Primary Key
     public $primaryKey = 'id';
-    //Timestamps
-    public $timestamps = true;
 
-    public function user_service()
+    public $timestamps = false;
+
+    public function favorites()
     {
-        return $this->hasMany('App\User_service');
+        return $this->hasMany('App\Favorites');
     }
     public function coments()
     {

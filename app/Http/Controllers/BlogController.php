@@ -15,6 +15,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Attēlot visas ziņas
     public function index()
     {
         $posts = Blog::orderBy('created_at', 'desc')->paginate(10);
@@ -29,6 +30,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Atvērt ziņas veidošanas skatu
     public function create()
     {
         return view('Blog/zina-add');
@@ -40,16 +42,20 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // Saglabāt ziņu
     public function store(Request $request)
     {
+
+        // Validācijas noteikumi
         $rules = array(
-            'title' => 'required|string|max:100',
-            'text' => 'required|string|max:10000',
+            'title' => 'required|string|between:1,100',
+            'text' => 'required|string|between:1,10000',
             'picture' => 'required|image',
         );
 
         $this->validate($request, $rules);
 
+        // Pievienot bildi
         $fileNameWithExt = $request->file('picture')->GetClientOriginalName();
         $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
         $extension = $request->file('picture')->getClientOriginalExtension();
@@ -72,6 +78,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Attēlot ziņu
     public function show($id)
     {
         $post = Blog::find($id);
@@ -84,6 +91,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Ziņas rediģēšanas skats
     public function edit($id)
     {
         $post = Blog::find($id);
@@ -97,16 +105,21 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Rediģēt ziņu
     public function update(Request $request, $id)
     {
+        // Valdācijas noteikumi
         $rules = array(
-            'title' => 'required|string|max:100',
-            'text' => 'required|string|max:10000',
+            'title' => 'required|string|between:1,100',
+            'text' => 'required|string|between:1,10000',
             'picture' => 'image',
         );
 
+        $this->validate($request, $rules);
+
         $post = Blog::find($id);
         
+        // Izdzēst veco bildi un pievienot jauno bildi,ja tā tika izvēlēta
         if ($request->hasFile('picture')) {
             $fileNameWithExt = $request->file('picture')->GetClientOriginalName();
             $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
@@ -130,6 +143,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Izdzēst ziņu
     public function destroy($id)
     {
         $post = Blog::find($id);

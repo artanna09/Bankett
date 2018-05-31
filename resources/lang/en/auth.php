@@ -13,7 +13,6 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'E-pasts vai parole tika ievadīta nepareizi.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
 ];

@@ -27,8 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function user_service(){
-        return $this->hasMany('App\User_service');
+    public function favorites(){
+        return $this->hasMany('App\Favorites');
     }
     public function coments(){
         return $this->hasMany('App\Coments');
@@ -39,6 +39,7 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo('App\Role');
     }
+    // Pārbauda, vai lietotājs ir admininstrators
     public function isAdmin(){
         return ($this->role_id == 1);
     }

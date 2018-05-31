@@ -34,10 +34,12 @@
                     <h5>Atrašanas vieta</h5>
                     <select name="district" class="form-control">
                         <option value="Visi" selected="">Visi</option>
-                        <optgroup label="Riga">
+                        <optgroup label="Rīga">
                             <option value="Centrs">Centrs</option>
                             <option value="Purvciems">Purvciems</option>
                             <option value="Pļavnieki">Pļavnieki</option>
+                            <option value="Imanta">Imanta</option>
+                            <option value="Ķengarags">Ķengarags</option>
                         </optgroup>
                     </select>
                 </div>
@@ -54,7 +56,7 @@
             <ul class="push">
                 <a href="{{ route('services') }}"><li>Visi pakalpojumi</li></a>                
                 @foreach ($serviceTypes as $serviceType)
-                    <a href="{{ route('sortServices', ['id' => $serviceType->id]) }}"><li>{{ $serviceType->name }}</li></a>
+                    <a href="{{ route('filterServices', ['id' => $serviceType->id]) }}"><li>{{ $serviceType->name }}</li></a>
                 @endforeach
             </ul>
         </div>

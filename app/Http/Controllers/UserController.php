@@ -10,12 +10,14 @@ use App\User;
 
 class UserController extends Controller
 {
+    // Attēlot lietotāja profilu
     public function index()
     {
         $user = User::find(Auth::user()->id);
         return view('Users/profile')->with('user', $user);
     }
 
+    // Atvērt lietotāja profila rediģēšanas skatu
     public function edit()
     {
         $user = User::find(Auth::user()->id);
@@ -29,36 +31,46 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Rediģēt lietotāja profilu
     public function update(Request $request)
     {
+        // Validācijas noteikumi
         $rules = array(
-            'name' => 'required|string|max:50|min:2',
-            'surname' => 'required|string|max:100|min:2',
-            'email' => 'required|string|email|max:256',
-            'phone' => 'required|string|min:8|max:12',
-            'password' => 'nullable|string|min:6|max:20|confirmed',
+            'name' => 'required|string|between:2,50',
+            'surname' => 'required|string|between:2,50',
+            'email' => 'required|string|email|between:6,256',
+            'phone' => 'required|string|between:8,12',
+            'password' => 'nullable|string|between:6,20|confirmed',
             'picture' => 'image',
         );
 
         $this->validate($request, $rules);
+
         $user = User::find(Auth::user()->id);
         
+        // Ja jauna bilde tika izvēlēta, tad izdzēst veco un augšupielādēt jauno
         if ($request->hasFile('picture')) {
             $fileNameWithExt = $request->file('picture')->GetClientOriginalName();
             $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('picture')->getClientOriginalExtension();
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             $path = $request->file('picture')->storeAs('public/users', $fileNameToStore);
+            // Ja bilde bija noimage.png, tad nedzēst no
             if ($user->picture != "noimage.png") {
                 Storage::delete('public/users/' . $user->picture);
             }
             $user->picture = $fileNameToStore;
         }
+        // Pārbaudīt, vai parole tika mainīta
         if (!empty($request->input('password'))) {
             $user->password = Hash::make($request->input('password'));
         }
-        if ($request->input('email') != $user->email) {
-            $user->email = $request->input('email');
+        if($user->email != $request->input('email')){
+            $existingEmail = User::where('email','=', $request->input('email'))->first();
+            if($existingEmail->id != Auth::user()->id){
+                return view('Users/profile-red')->with('error', 'Lietotājs ar tādu e-pastu jau eksistē sistēmā')
+                                                ->with('user', $user);
+            }
         }
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
@@ -74,9 +86,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Izdzēst lietotāju
     public function destroy()
     {
         $user = User::find(Auth::user()->id);
+        // Ja bilde bija noimage.png, tad nedzēst bildi
         if($user->picture != "noimage.png"){
             Storage::delete('public/users/' . $user->picture);
         }

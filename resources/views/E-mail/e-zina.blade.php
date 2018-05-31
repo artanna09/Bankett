@@ -10,7 +10,7 @@
                 <strong>Uzrakstiet šeit jūsu ziņu, lai pakalpojumu sniedzējs varētu to apskatīt</strong>
             </h2>
             <div class="form-group">
-                <textarea class="form-control" rows="10" name="content"></textarea>
+                <textarea class="form-control" rows="10" name="content">{{ old('content') }}</textarea>
             </div>
             <input type="hidden" value="{{ $serviceId }}" name="serviceId">
             <div class="form-group">

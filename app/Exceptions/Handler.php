@@ -48,6 +48,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // Pārbaudīt, vai tika saņemta kļūda par pārāk lielu bildi
+        if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException)
+            return redirect()->action('IndexController@imageError');
         return parent::render($request, $exception);
     }
 }

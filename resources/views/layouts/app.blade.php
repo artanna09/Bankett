@@ -62,10 +62,10 @@
                         <!-- Authentication Links -->
                         @guest
                         <li>
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Ieiet') }}</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Reģistrēties') }}</a>
                         </li>
                         @else
                         <li role="presentation" class="nav-item">
@@ -90,7 +90,7 @@
                                 <a class="dropdown-item" role="presentation" href="{{ route('editUserProfile') }}">Rediģēt profilu</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('Iziet') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

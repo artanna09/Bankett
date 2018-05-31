@@ -32,7 +32,7 @@
                         <label class="col-form-label" for="title">Tips</label>
                     </div>
                     <div class="col-6">
-                        {{ Form::select('serviceType', $serviceTypes, ['class' => 'form-control']) }} 
+                        {{ Form::select('serviceType', $serviceTypes, is_null(old('serviceType')) ? $service->service_type_id : old('serviceType') ,['class' => 'form-control']) }} 
                     </div>
                 </div>
             </div>
@@ -62,6 +62,8 @@
                                 <option value="Centrs" @if( $service->district == "Centrs" ) selected="" @endif>Centrs</option>
                                 <option value="Purvciems" @if( $service->district == "Purvciems" ) selected="" @endif>Purvciems</option>
                                 <option value="Pļavnieki" @if( $service->district == "Pļavnieki" ) selected="" @endif>Pļavnieki</option>
+                                <option value="Imanta" @if( $service->district == "Imanta" ) selected="" @endif>Imanta</option>
+                                <option value="Ķengarags" @if( $service->district == "Ķengarags" ) selected="" @endif>Ķengarags</option>
                             </optgroup>
                         </select>
                     </div>

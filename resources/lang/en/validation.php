@@ -99,10 +99,76 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    // Kļūdas teksts katram laukam latviešu valodā
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'required' => 'Lauks "E-pasts" ir obligāts',
+            'between' => 'E-pastam jābūt no :min līdz :max simboliem garam',
+            'unique' => 'Laietotājs ar tādu e-pastu jau eksistē sistēmā',
+            'email' => 'E-pastam jābut "E-mail" formāts',
+        ],
+        'password' => [
+            'required' => 'Lauks "Parole" ir obligāts',
+            'confirmed' => 'Atkārtota parole nesakrīt ar paroli',
+            'between' => 'Parolei jābūt no :min līdz :max simboliem garam',
+        ],
+        'title' => [
+            'required' => 'Lakus "Nosaukums" ir obligāts',
+            'between' => 'Ievadītajām nosaukumam jābūt no :min līdz :max simbolu skaitam'
+        ],
+        'extra_service' => [
+            'max' => 'Ievadītajiem papildpakalpojumiem jābūt no 1 līdz :max simbolu skaitam'
+        ],
+        'district' => [
+            'required' => 'Atrašanas vieta nav izvelēta'
+        ],
+        'adress' => [
+            'max' => 'Ievadītajai adresei jābūt no 1 līdz :max simbolu skaitam'
+        ],
+        'price' => [
+            'required' => 'Lakus "Cena" ir obligāts',
+            'digits_between' => 'Ievadītajai cenai jābūt no :min līdz :max simbolu skaitam'
+        ],
+        'phone' => [
+            'between' => 'Ievadītajam tālrunim jābūt no :min līdz :max simbolu skaitam'
+        ],
+        'description' => [
+            'required' => 'Lauks "Apraksts" ir obligāts',
+            'between' => 'Ievadītajam aprakstam jābūt no :min līdz :max simbolu skaitam',
+        ],
+        'photo' => [
+            'required' => 'Lauks "Bilde" ir obligāts',
+            'image' => 'Failam jābūt bildes formāta'
+        ],
+        'content' => [
+            'between' => 'Ievadītajai ziņai jābūt no :min līdz :max simbolu skaitam'
+        ],
+        'text' => [
+            'required' => 'Lauks "Ziņa" ir obligāts',
+            'between' => 'Ievadītai atsauksmei jābūt no :min līdz :max simbolu skaitam',
+        ],
+        'picture' => [
+            'required' => 'Lauks "Bilde" ir obligāts',
+            'image' => 'Failam jābūt bildes formāta'
+        ],
+        'name' => [
+            'between' => 'Vārdam jābūt no :min līdz :max simboliem garam',
+            'required' => 'Lauks "Vārds" ir obligāts',
+        ],
+        'surname' => [
+            'between' => 'Uzvārdam jābūt no :min līdz :max simboliem garam',
+            'required' => 'Lauks "Uzvārds" ir obligāts',
+        ],
+        'phone' => [
+            'between' => 'Tālrunim jābūt no :min līdz :max simboliem garam',
+            'required' => 'Lauks "Tālrunis" ir obligāts',
+        ],
+        'person_number_to' => [
+            'min' => 'Cilvēku daudzumam līdz jābūt lielākam nekā cilvēku daudzumam no',
+            'integer' => 'Cilvēku daudzumam līdz ir jābūt ciparam'
+        ],
+        'person_number_from' => [
+            'integer' => 'Cilvēku no līdz ir jābūt ciparam'
         ],
     ],
 

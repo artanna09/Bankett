@@ -14,6 +14,7 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+    // Pārbauda, vai lietotājs ir administrators
     public function handle($request, Closure $next)
     {
         if (!(Auth::check() && Auth::user()->isAdmin()))

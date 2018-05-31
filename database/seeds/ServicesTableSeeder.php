@@ -25,8 +25,6 @@ class ServicesTableSeeder extends Seeder
             'description' => "Jūsu bankets būs neaizmirstams.",
             'photo' => "image01.jpg",
             'service_type_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('service')->insert([
             'title' => "Lorem ipsum dolor sit amet.",
@@ -41,8 +39,6 @@ class ServicesTableSeeder extends Seeder
             'description' => "Nunc semper enim ante, sed imperdiet tellus imperdiet id. Fusce ac magna leo. Duis mattis faucibus ante, sit amet consectetur ipsum ullamcorper vitae. Nullam condimentum elementum sem, at tincidunt mauris commodo non. Suspendisse ornare fermentum elit faucibus ultrices. Ut a diam euismod lacus commodo condimentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam posuere in mauris at elementum. Maecenas pulvinar lorem id mauris blandit laoreet. ",
             'photo' => "large.jpg",
             'service_type_id' => 2,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('service')->insert([
             'title' => "Quisque congue consequat tempus.",
@@ -57,8 +53,6 @@ class ServicesTableSeeder extends Seeder
             'description' => "Duis sed auctor diam. Suspendisse porttitor quam porta elementum vehicula. Ut ante est, porttitor at augue ut, sodales euismod massa. Integer fermentum purus sed nisl congue, a malesuada arcu feugiat. Nulla euismod porta felis sit amet placerat. Suspendisse lacinia, purus nec condimentum placerat, nisl purus luctus lectus, laoreet pulvinar nisl massa vel massa. Etiam justo nisl, viverra in dolor sit amet, imperdiet congue nulla. Ut sollicitudin, lectus sed vehicula consequat, nulla justo feugiat nibh, quis viverra libero enim in nibh.",
             'photo' => "normal (1).jpg",
             'service_type_id' => 3,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
 }

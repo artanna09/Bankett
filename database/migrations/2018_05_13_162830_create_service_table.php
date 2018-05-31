@@ -30,7 +30,6 @@ class CreateServiceTable extends Migration
             $table->string('photo', 300);
             $table->integer('service_type_id')->unsigned();
             $table->foreign('service_type_id')->references('id')->on('service_type')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

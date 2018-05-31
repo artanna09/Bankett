@@ -32,10 +32,12 @@
                     </div>
                     <div class="col-6">
                         <select name="district" class="form-control{{ $errors->has('district') ? ' is-invalid' : '' }}">
-                            <optgroup label="Riga">
+                            <optgroup label="Rīga">
                                 <option value="Centrs" @if(old('district') == "Centrs") selected="" @endif>Centrs</option>
                                 <option value="Purvciems" @if(old('district') == "Purvciems") selected="" @endif>Purvciems</option>
                                 <option value="Pļavnieki" @if(old('district') == "Pļavnieki") selected="" @endif>Pļavnieki</option>
+                                <option value="Imanta" @if( old('district') == "Imanta" ) selected="" @endif>Imanta</option>
+                                <option value="Ķengarags" @if( old('district') == "Ķengarags" ) selected="" @endif>Ķengarags</option>
                             </optgroup>
                         </select>
                     </div>
